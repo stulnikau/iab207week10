@@ -1,6 +1,7 @@
 from . import db
 from datetime import datetime
 from flask_login import UserMixin
+import time
 
 
 class User(db.Model, UserMixin):
@@ -42,3 +43,8 @@ class Comment(db.Model):
 
     def __repr__(self):
         return "<Comment: {}>".format(self.text)
+
+    def created_at_formatted(self):
+        return time.strftime(
+            "%d %B %Y", time.strptime(str(self.created_at).split(" ")[0], "%Y-%m-%d")
+        )
