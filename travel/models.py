@@ -45,4 +45,4 @@ class Comment(db.Model):
         return "<Comment: {}>".format(self.text)
 
     def created_at_formatted(self):
-        return self.created_at.strftime("%d %B %Y")
+        return self.created_at.strftime("%d %B %Y at %H:%M")
