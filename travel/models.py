@@ -36,7 +36,7 @@ class Comment(db.Model):
     __tablename__ = "comments"
     id = db.Column(db.Integer, primary_key=True)
     text = db.Column(db.String(400))
-    created_at = db.Column(db.DateTime, default=datetime.now())
+    created_at: datetime = db.Column(db.DateTime, default=datetime.now())
     # add the foreign keys
     user_id = db.Column(db.Integer, db.ForeignKey("users.id"))
     destination_id = db.Column(db.Integer, db.ForeignKey("destinations.id"))
@@ -45,6 +45,4 @@ class Comment(db.Model):
         return "<Comment: {}>".format(self.text)
 
     def created_at_formatted(self):
-        return time.strftime(
-            "%d %B %Y", time.strptime(str(self.created_at).split(" ")[0], "%Y-%m-%d")
-        )
+        return self.created_at.strftime("%d %B %Y")
